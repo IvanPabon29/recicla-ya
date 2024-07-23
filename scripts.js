@@ -14,9 +14,9 @@ function generarEnteroAleatorio(min, max){
 //se crea una funcion para poder cambiar la cita
 function cambiarCita (){
     let indiceAleatorio = generarEnteroAleatorio(0, citas.length);
-    fraseElem.innerText = `"${citas[indiceAleatorio].frase}"`
+    fraseElem.innerText = `"${citas[indiceAleatorio].frase}"`;
     autorElem.innerText = citas[indiceAleatorio].autor;
-}
+};
 cambiarCita();
 
 //Agregar evento al boton.
