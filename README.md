@@ -7,8 +7,10 @@ Interfaz:
 
 Tecnologías utilizadas:
 
-=> HTML: Para la estructura del contenido web
+=> HTML: Para la estructura del contenido web.
+
 => CSS: Para el diseño y la presentación de las citas.
+
 => JavaScript: Para la funcionalidad de generación aleatoria de citas.
 
 
