@@ -1,0 +1,23 @@
+/* layoutPrivado.css */
+
+.layout-privado {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gris-claro);
+}
+
+.contenido-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Scroll solo para el contenido (sin mover header/footer) */
+.main-privado {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  background-color: var(--blanco);
+}
