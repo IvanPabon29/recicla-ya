@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import '../styles/home.css';
 import { Link } from 'react-router-dom';
 
@@ -26,15 +25,29 @@ function Home() {
         <div className="container">
           <h2>¿Quiénes Somos?</h2>
           <p>
-            ReciclaYa es una iniciativa tecnológica que busca promover la separación y recolección de residuos
-            de manera organizada, premiando a los usuarios por su compromiso ambiental.
+            Somos una plataforma ambiental que incentiva el reciclaje responsable mediante un sistema de recompensas.
+            Trabajamos con empresas recolectoras, usuarios y comunidades para reducir el impacto ambiental.
           </p>
-          <i className="bi bi-globe2 section-icon"></i>
+
+          <div className="quienes-icons">
+            <div>
+              <i className="bi bi-tree-fill"></i>
+              <p>Compromiso Ambiental</p>
+            </div>
+            <div>
+              <i className="bi bi-people-fill"></i>
+              <p>Comunidad Participativa</p>
+            </div>
+            <div>
+              <i className="bi bi-award-fill"></i>
+              <p>Recompensas Justas</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Cómo Funciona */}
-      <section className="section bg-white" id="funciona">
+      <section className="section funciona" id="funciona">
         <div className="container">
           <h2>¿Cómo Funciona?</h2>
           <div className="funciona-steps">
@@ -61,12 +74,24 @@ function Home() {
       <section className="section servicios" id="servicios">
         <div className="container">
           <h2>Servicios</h2>
-          <ul className="servicios-lista">
-            <li><i className="bi bi-recycle"></i> Recolección de residuos reciclables</li>
-            <li><i className="bi bi-exclamation-triangle-fill"></i> Recolección de residuos peligrosos</li>
-            <li><i className="bi bi-graph-up"></i> Reportes personalizados por usuario</li>
-            <li><i className="bi bi-whatsapp"></i> Notificaciones automáticas por WhatsApp</li>
-          </ul>
+          <div className="servicios-lista">
+            <div className="servicio">
+              <i className="bi bi-recycle"></i>
+              <p>Recolección de residuos reciclables</p>
+            </div>
+            <div className="servicio">
+              <i className="bi bi-exclamation-triangle-fill"></i>
+              <p>Recolección de residuos peligrosos</p>
+            </div>
+            <div className="servicio">
+              <i className="bi bi-graph-up"></i>
+              <p>Reportes personalizados por usuario</p>
+            </div>
+            <div className="servicio">
+              <i className="bi bi-whatsapp"></i>
+              <p>Notificaciones automáticas por WhatsApp</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -74,7 +99,6 @@ function Home() {
       <section className="section contacto" id="contacto">
         <div className="container">
           <h2>Contacto</h2>
-          <p>¿Tienes preguntas o deseas sumarte como empresa aliada?</p>
           <p><i className="bi bi-geo-alt"></i> Bogotá, Colombia</p>
           <p><i className="bi bi-envelope"></i> contacto@reciclayapp.com</p>
           <p><i className="bi bi-telephone"></i> +57 310 000 0000</p>
