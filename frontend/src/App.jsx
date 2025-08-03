@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import PublicLayout from './layout/PublicLayout';
+import Home from './pages/Home';
+import Registro from './pages/Registro';
+import Login from './pages/Login';
+import PrivadoLayout from './layout/PrivateLayout';
+import AdminLayout from './layout/AdminLayout';
+
+import Dashboard from './pages/Dashboard';
+import Recolecciones from './pages/Recolecciones';
+import Historial from './pages/Historial';
+import Puntos from './pages/Puntos';
+import Perfil from './pages/Perfil';
+
+import AdminDashboard from './pages/admin/AdminDashboard';
+import GestionUsuarios from './pages/admin/GestionUsuarios';
+import EmpresasRecolectoras from './pages/admin/EmpresasRecolectoras';
+import Solicitudes from './pages/admin/Solicitudes';
+import Reportes from './pages/admin/Reportes';
+import Configuraciones from './pages/admin/Configuraciones';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+
+      {/* Layout público */}
+      <Route path="/" element={<PublicLayout />}>
+        <Route index element={<Home />} />
+      </Route>
+
+      <Route path="/registro" element={<Registro />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Layout privado para usuarios */}
+      <Route path="/panel" element={<PrivadoLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="recolecciones" element={<Recolecciones />} />
+        <Route path="historial" element={<Historial />} />
+        <Route path="puntos" element={<Puntos />} />
+        <Route path="perfil" element={<Perfil />} />
+      </Route>
+
+      {/* Layout privado para admin */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="usuarios" element={<GestionUsuarios />} />
+        <Route path="recolectores" element={<EmpresasRecolectoras />} />
+        <Route path="solicitudes" element={<Solicitudes />} />
+        <Route path="reportes" element={<Reportes />} />
+        <Route path="configuraciones" element={<Configuraciones />} />
+      </Route>
+      
+    </Routes>
+  );
 }
 
-export default App
+export default App;
