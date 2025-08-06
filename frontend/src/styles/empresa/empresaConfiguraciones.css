@@ -1,0 +1,77 @@
+@import '../variables.css';
+
+.empresa-config {
+  padding: 2rem;
+  background-color: #fdfefc;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.empresa-config h2 {
+  color: var(--verde-principal);
+  font-size: 2.2rem;
+}
+
+.empresa-config .subtitulo {
+  font-size: 1.1rem;
+  color: var(--gris-texto);
+  margin-bottom: 2rem;
+}
+
+.form-config {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--gris-oscuro);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn-guardar-config {
+  display: block;
+  width: 100%;
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  padding: 0.9rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-guardar-config:hover {
+  background-color: var(--verde-claro);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .empresa-config h2 {
+    font-size: 1.8rem;
+  }
+
+  .form-config {
+    padding: 1.5rem;
+  }
+}
