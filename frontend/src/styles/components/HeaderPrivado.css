@@ -1,0 +1,75 @@
+@import '../variables.css';
+
+.header-privado {
+  width: 100%;
+  background-color: var(--verde-principal);
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--gris-borde);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Menú hamburguesa (solo visible en móviles) */
+.btn-hamburguesa {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--negro);
+  display: none;
+}
+
+.empresa-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: var(--verde-principal);
+}
+
+.empresa-logo i {
+  font-size: 1.5rem;
+}
+
+/* Usuario + botón cerrar sesión */
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.usuario-nombre {
+  font-weight: 500;
+  color: var(--negro);
+}
+
+.btn-salir {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-salir:hover {
+  background-color: var(--verde-claro);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .btn-hamburguesa {
+    display: inline-block;
+  }
+
+  .usuario-nombre {
+    display: none;
+  }
+}

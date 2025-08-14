@@ -1,0 +1,24 @@
+@import '../variables.css';
+
+.footer-private {
+  background-color: var(--gris-claro);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--gris-borde);
+  position: relative;
+  z-index: 900;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--verde-principal);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.footer-content i {
+  font-size: 1.2rem;
+}

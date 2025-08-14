@@ -1,0 +1,123 @@
+@import '../variables.css';
+
+/* HEADER fijo y profesional */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+}
+
+/* LOGO */
+.logo a {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--blanco);
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+/* BOTÓN HAMBURGUESA */
+.hamburguesa {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--blanco);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* NAVEGACIÓN */
+.nav {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav a {
+  color: var(--blanco);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.2s ease;
+}
+
+.nav a:hover,
+.nav a:focus {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* BOTONES DE ACCIÓN */
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+/* INSCRIBIRSE */
+.btn-primary {
+  background-color: var(--blanco);
+  color: var(--verde-principal);
+}
+
+.btn-primary:hover {
+  background-color: var(--verde-claro);
+  color: var(--blanco);
+}
+
+/* INICIAR SESIÓN */
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--blanco);
+  color: var(--blanco);
+}
+
+.btn-secondary:hover {
+  background-color: var(--verde-claro);
+  border-color: var(--verde-claro);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hamburguesa {
+    display: block;
+  }
+
+  .nav,
+  .header-actions {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--verde-principal);
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+
+  .nav.activo,
+  .header-actions.activo {
+    display: flex;
+  }
+
+  .nav a,
+  .header-actions a {
+    padding-left: 1rem;
+  }
+}
