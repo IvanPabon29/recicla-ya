@@ -1,31 +1,48 @@
 // src/components/Header.jsx
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 
 /**
- * Header del sitio público. Incluye logo, navegación y botones de sesión.
- * Estilo responsivo y adaptado a la paleta ecológica.
+ * Header público del sistema. 
+ * - Fijo en la parte superior.
+ * - Con menú hamburguesa en móviles.
+ * - Estilo ecológico y profesional.
  */
 function Header() {
+  // Estado para controlar el menú hamburguesa
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  const toggleMenu = () => setMenuAbierto(!menuAbierto);
+  const cerrarMenu = () => setMenuAbierto(false);
+
   return (
     <header className="header">
+      {/* Logo */}
       <div className="logo">
-        <Link to="/">
+        <Link to="/" onClick={cerrarMenu}>
           ♻️ <span>ReciclaYa</span>
         </Link>
       </div>
 
-      <nav className="nav">
-        <Link to="/">Inicio</Link>
-        <a href="#quienes">Quienes Somos</a>
-        <a href="#funciona">Cómo Funciona</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
+      {/* Botón Hamburguesa */}
+      <button className="hamburguesa" onClick={toggleMenu} aria-label="Menú">
+        <i className="bi bi-list"></i>
+      </button>
+
+      {/* Navegación */}
+      <nav className={`nav ${menuAbierto ? 'activo' : ''}`}>
+        <a href="#inicio" onClick={cerrarMenu}>Inicio</a>
+        <a href="#quienes" onClick={cerrarMenu}>Quienes Somos</a>
+        <a href="#funciona" onClick={cerrarMenu}>Cómo Funciona</a>
+        <a href="#servicios" onClick={cerrarMenu}>Servicios</a>
+        <a href="#contacto" onClick={cerrarMenu}>Contacto</a>
       </nav>
 
-      <div className="header-actions">
-        <Link to="/login" className="btn-secondary">Iniciar Sesión</Link>
-        <Link to="/registro" className="btn-primary">Inscribirse</Link>
+      {/* Botones de acción */}
+      <div className={`header-actions ${menuAbierto ? 'activo' : ''}`}>
+        <Link to="/login" className="btn-secondary" onClick={cerrarMenu}>Iniciar Sesión</Link>
+        <Link to="/registro" className="btn-primary" onClick={cerrarMenu}>Inscribirse</Link>
       </div>
     </header>
   );
