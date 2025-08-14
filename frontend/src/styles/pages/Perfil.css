@@ -1,0 +1,90 @@
+@import '../variables.css';
+
+.perfil {
+  padding: 2.5rem;
+}
+
+.perfil h2 {
+  font-size: 2rem;
+  color: var(--verde-principal);
+  margin-bottom: 0.3rem;
+}
+
+.perfil p {
+  color: var(--gris-oscuro);
+  margin-bottom: 2rem;
+}
+
+.perfil-card {
+  background-color: var(--blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.perfil-datos div {
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gris-claro);
+  padding-bottom: 0.5rem;
+}
+
+.perfil-datos label {
+  font-weight: bold;
+  color: var(--verde-principal);
+  flex: 1;
+}
+
+.perfil-datos span {
+  flex: 2;
+  text-align: right;
+  color: var(--negro);
+}
+
+.perfil-opciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.btn-editar,
+.btn-password {
+  flex: 1;
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover,
+.btn-password:hover {
+  background-color: var(--verde-claro);
+}
+
+.btn-editar i,
+.btn-password i {
+  margin-right: 0.4rem;
+}
+
+@media (max-width: 600px) {
+  .perfil-card {
+    padding: 1.5rem;
+  }
+
+  .perfil-opciones {
+    flex-direction: column;
+  }
+
+  .perfil-datos label,
+  .perfil-datos span {
+    font-size: 0.95rem;
+  }
+}

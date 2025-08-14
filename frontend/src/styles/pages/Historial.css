@@ -1,0 +1,62 @@
+@import '../variables.css';
+
+.historial {
+  padding: 2.5rem;
+}
+
+.historial h2 {
+  color: var(--verde-principal);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.historial p {
+  color: var(--gris-oscuro);
+  margin-bottom: 2rem;
+}
+
+.historial-tabla {
+  overflow-x: auto;
+}
+
+.historial-tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--blanco);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.historial-tabla th,
+.historial-tabla td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gris-claro);
+}
+
+.historial-tabla th {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  font-weight: bold;
+}
+
+.estado.completado {
+  color: var(--verde-oscuro);
+  font-weight: 600;
+}
+
+.estado.pendiente {
+  color: #e67e22;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .historial {
+    padding: 1.5rem 1rem;
+  }
+
+  .historial-tabla table {
+    font-size: 0.9rem;
+  }
+}

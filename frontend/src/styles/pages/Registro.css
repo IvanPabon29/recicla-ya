@@ -1,0 +1,125 @@
+@import '../Variables.css';
+
+/* Estilo general del fondo */
+#registro {
+  height: 100vh;
+  width: 100%;
+  background-image: url('/images/fondo-registro.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  overflow-y: auto;
+}
+
+/* Overlay oscuro sobre la imagen */
+.registro-overlay {
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* Contenedor del formulario */
+.registro-container {
+  background: var(--gris-claro);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+.registro-container h2 {
+  color: var(--verde-principal);
+  margin-bottom: 0.5rem;
+}
+
+.registro-container p {
+  margin-bottom: 2rem;
+  color: var(--gris-oscuro);
+}
+
+/* Inputs */
+.registro-form .form-group {
+  margin-bottom: 1.3rem;
+  text-align: left;
+}
+
+.registro-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: var(--negro);
+}
+
+.registro-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--verde-principal);
+  box-shadow: 0 0 0 2px rgba(34, 139, 34, 0.2);
+}
+
+/* Botón */
+.btn-primary-registro {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-primary-registro:hover {
+  background-color: var(--verde-claro);
+}
+
+/* Enlace al login */
+.login-link {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--negro);
+}
+
+.login-link a {
+  color: var(--verde-principal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .registro-container {
+    padding: 2rem 1.2rem;
+  }
+
+  .registro-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .registro-form input {
+    font-size: 0.95rem;
+  }
+
+  .btn-primary-registro {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,295 @@
+@import '../variables.css';
+
+/* HERO con imagen de fondo */
+.hero {
+  background-image: url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--blanco);
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.btn-primary-hero {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary-hero:hover {
+  background-color: var(--verde-claro);
+}
+
+/* Secciones Generales */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  color: var(--verde-principal);
+}
+
+/* Seccion quienes somos */
+
+.quienes {
+  background-color: #e7f3eb;
+  padding: 4rem 2rem;
+}
+
+.quienes-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.quienes-img img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+.quienes-content {
+  flex: 1;
+  max-width: 600px;
+  text-align: left;
+  h2{
+    text-align: center;
+  }
+}
+.quienes-content p {
+  margin-bottom: 1.5rem;
+}
+
+.quienes-icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.quienes-icons div {
+  text-align: center;
+}
+
+.quienes-icons i {
+  font-size: 2rem;
+  color: var(--verde-oscuro);
+  margin-bottom: 0.5rem;
+}
+
+/* Seccion como funciona */
+.funciona {
+  background-color: var(--verde-oscuro);
+  color: var(--blanco);
+}
+.funciona h2 {
+  color: var(--blanco);
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.funciona-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.step {
+  background: var(--blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 250px;
+  text-align: center;
+  color: var(--negro);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+.step i {
+  font-size: 2rem;
+  color: var(--verde-principal);
+  margin-bottom: 0.5rem;
+}
+
+/* Servicios */
+.servicios {
+  background-color: #e7f3eb;
+}
+
+.servicios-lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.servicio {
+  background: var(--blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 280px;
+  transition: transform 0.3s ease;
+}
+
+.servicio:hover {
+  transform: scale(1.05);
+}
+
+.servicio i {
+  font-size: 2rem;
+  color: var(--verde-principal);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.servicio p {
+  font-size: 1.1rem;
+}
+
+/* Contacto */
+.contacto {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+}
+
+.contacto h2 {
+  color: var(--blanco);
+  font-size: 2.4rem;
+}
+.contacto p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.contacto i {
+  margin-right: 0.5rem;
+}
+
+.contacto-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+.mapa {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+}
+
+.contacto-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Formulario contacto  */
+.form-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.form-contacto input,
+.form-contacto textarea {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  resize: none;
+}
+.form-contacto button {
+  background-color: var(--blanco);
+  color: var(--verde-principal);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-contacto button:hover {
+  background-color: var(--verde-claro);
+  color: var(--blanco);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .funciona-steps, .servicios-lista, .quienes-icons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quienes-container,
+  .contacto-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .quienes-content {
+    text-align: center;
+  }
+
+  .quienes-icons {
+    justify-content: center;
+  }
+}

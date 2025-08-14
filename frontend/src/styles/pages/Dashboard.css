@@ -1,0 +1,56 @@
+@import '../variables.css';
+
+.dashboard {
+  padding: 2rem;
+}
+
+.dashboard h2 {
+  margin-bottom: 2rem;
+  color: var(--verde-principal);
+  font-size: 2rem;
+}
+
+.dashboard-cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card.resumen {
+  flex: 1 1 250px;
+  background-color: var(--gris-claro);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.card.resumen:hover {
+  transform: scale(1.03);
+}
+
+.card.resumen i {
+  font-size: 2.2rem;
+  color: var(--verde-principal);
+}
+
+.card.resumen h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.card.resumen p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--negro);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-cards {
+    flex-direction: column;
+  }
+}
