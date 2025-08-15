@@ -1,56 +1,118 @@
 import '../../styles/pages/registro.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import api from '../../services/authService'; // Aquí centralizamos las peticiones HTTP
 
 /**
  * Página de registro para nuevos usuarios del sistema ReciclaYa.
  * Permite ingresar datos personales básicos para crear una cuenta.
  */
 function Registro() {
+
+  // Hook para navegación
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    correo: '',
+    telefono: '',
+    direccion: '',
+    password: '',
+    confirmar: ''
+  });
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Maneja cambios en los inputs
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  // Maneja envío del formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    // Validación básica
+    if (formData.password !== formData.confirmar) {
+      setError('Las contraseñas no coinciden');
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Llamada al backend (cuando esté listo)
+      await api.post('/auth/register', {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        correo: formData.correo,
+        telefono: formData.telefono,
+        direccion: formData.direccion,
+        password: formData.password
+      });
+
+      // Redirige a login si todo sale bien
+      navigate('/login');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error al registrar usuario');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main id="registro">
       <div className="registro-overlay">
-
         <div className="registro-container">
           <h2>Crear Cuenta</h2>
           <p>Ingresa tus datos para unirte a ReciclaYa ♻️</p>
 
-          <form className="registro-form">
+          {error && <div className="error-message">{error}</div>}
+
+          <form className="registro-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="nombre">Nombre</label>
-              <input type="text" id="nombre" placeholder="Ej: Juan" required />
+              <input type="text" id="nombre" value={formData.nombre} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="apellido">Apellido</label>
-              <input type="text" id="apellido" placeholder="Ej: Pérez" required />
+              <input type="text" id="apellido" value={formData.apellido} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="correo">Correo electrónico</label>
-              <input type="email" id="correo" placeholder="Ej: juan@mail.com" required />
+              <input type="email" id="correo" value={formData.correo} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="telefono">Teléfono</label>
-              <input type="tel" id="telefono" placeholder="Ej: +57 300 000 0000" required />
+              <input type="tel" id="telefono" value={formData.telefono} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="direccion">Dirección</label>
-              <input type="text" id="direccion" placeholder="Ej: Calle 123 #45-67" required />
+              <input type="text" id="direccion" value={formData.direccion} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
-              <input type="password" id="password" placeholder="********" required />
+              <input type="password" id="password" value={formData.password} onChange={handleChange} required />
             </div>
             
             <div className="form-group">
               <label htmlFor="confirmar">Confirmar Contraseña</label>
-              <input type="password" id="confirmar" placeholder="********" required />
+              <input type="password" id="confirmar" value={formData.confirmar} onChange={handleChange} required />
             </div>
 
-            <button type="submit" className="btn-primary-registro">Registrarme</button>
+            <button type="submit" className="btn-primary-registro" disabled={loading}>
+              {loading ? 'Registrando...' : 'Registrarme'}
+            </button>
 
             <p className="login-link">
               ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link>
