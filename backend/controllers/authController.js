@@ -1,62 +1,78 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import pool from '../config/db.js';
+// controllers/authController.js
+const UserModel = require('../models/userModel.js');
+const bcrypt = require('bcryptjs'); // Librería para hashear contraseñas
+const jwt = require('jsonwebtoken'); // Librería para manejar JWT
 
-export async function register(req, res) {
-  try {
-    const { first_name, last_name, email, password, phone, address } = req.body;
 
-    const [exists] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
-    if (exists.length) return res.status(409).json({ error: 'El correo ya está registrado' });
+/**
+ * Controlador de autenticación y registro
+ * Crea un usuario nuevo si el correo no existe. Hashea la contraseña.
+ * Inicia sesión si el correo y la contraseña son correctos.
+ * Espera: { nombre, apellido, correo, telefono, direccion, password }
+ */
 
-    const hash = await bcrypt.hash(password, 10);
-    const [result] = await pool.query(
-      'INSERT INTO users (first_name, last_name, email, phone, address, password_hash) VALUES (?, ?, ?, ?, ?, ?)',
-      [first_name, last_name, email, phone || null, address || null, hash]
-    );
 
-    const token = jwt.sign({ id: result.insertId, email }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES || '7d'
-    });
+const authController = {
+  // Registra un nuevo usuario
+  register: async (req, res) => {
+    try {
+      const { nombre, apellido, correo, telefono, direccion, password } = req.body;
 
-    res.status(201).json({
-      user: { id: result.insertId, first_name, last_name, email, phone, address },
-      token
-    });
-  } catch (err) {
-    console.error('register error:', err);
-    res.status(500).json({ error: 'Error en el servidor' });
+      // Validación mínima
+      if (!nombre || !apellido || !correo || !telefono || !direccion || !password) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+      }
+
+      // usar modelo en lugar de SQL directo
+      const exists = await UserModel.findByCorreo(correo);
+      if (exists) {
+        return res.status(400).json({ message: 'El correo ya está registrado' });
+      }
+
+      // Hashear la contraseña
+      const hashed = await bcrypt.hash(password, 10);
+
+      // Crear el usuario usando el modelo
+      await UserModel.create({ nombre, apellido, correo, telefono, direccion, password: hashed });
+
+      return res.status(201).json({ message: 'Usuario registrado con éxito' });
+    } catch (error) {
+      console.error('Error en register:', error);
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
+  },
+
+  // Inicia sesión un usuario existente
+  login: async (req, res) => {
+    try {
+      const { correo, password } = req.body;
+
+      // Validación mínima
+      const user = await UserModel.findByCorreo(correo);
+      if (!user) {
+        return res.status(401).json({ message: 'Credenciales inválidas' });
+      }
+
+      // Verificar contraseña
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Credenciales inválidas' });
+      }
+
+      // Generar token JWT
+      const token = jwt.sign({ correo: user.correo }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+      return res.status(200).json({
+        message: 'Inicio de sesión exitoso',
+        token,
+        userId: user.correo
+      });
+    } catch (error) {
+      console.error('Error en login:', error);
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
   }
-}
+};
 
-export async function login(req, res) {
-  try {
-    const { email, password } = req.body;
+module.exports = authController;
 
-    const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-    if (!rows.length) return res.status(401).json({ error: 'Credenciales inválidas' });
-
-    const user = rows[0];
-    const ok = await bcrypt.compare(password, user.password_hash);
-    if (!ok) return res.status(401).json({ error: 'Credenciales inválidas' });
-
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES || '7d'
-    });
-
-    res.json({
-      user: {
-        id: user.id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        phone: user.phone,
-        address: user.address
-      },
-      token
-    });
-  } catch (err) {
-    console.error('login error:', err);
-    res.status(500).json({ error: 'Error en el servidor' });
-  }
-}
