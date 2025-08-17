@@ -1,5 +1,5 @@
 // src/components/FooterPrivate.jsx
-import '../styles/FooterPrivate.css';
+import '../styles/components/FooterPrivado.css';
 
 /**
  * Footer del layout privado de ReciclaYa.
