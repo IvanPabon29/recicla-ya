@@ -1,56 +1,47 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+
+// Layouts
 import PublicLayout from './layout/PublicLayout';
-import Home from './pages/Home';
-import Registro from './pages/Registro';
-import Login from './pages/Login';
-import PrivadoLayout from './layout/PrivateLayout';
-import AdminLayout from './layout/AdminLayout';
+import PrivateLayout from './layout/PrivateLayout';
 
-import Dashboard from './pages/Dashboard';
-import Recolecciones from './pages/Recolecciones';
-import Historial from './pages/Historial';
-import Puntos from './pages/Puntos';
-import Perfil from './pages/Perfil';
+// Páginas públicas
+import Home from './pages/public/Home';
+import Login from './pages/public/Login';
+import Registro from './pages/public/Registro';
 
-import AdminDashboard from './pages/admin/AdminDashboard';
-import GestionUsuarios from './pages/admin/GestionUsuarios';
-import EmpresasRecolectoras from './pages/admin/EmpresasRecolectoras';
-import Solicitudes from './pages/admin/Solicitudes';
-import Reportes from './pages/admin/Reportes';
-import Configuraciones from './pages/admin/Configuraciones';
+// Páginas privadas (usuario normal)
+import Perfil from './pages/private/Perfil';
+import Dashboard from './pages/private/Dashboard';
+import Recolecciones from './pages/private/Recolecciones';
+import Reporte from './pages/private/Reporte';
+import Historial from './pages/private/Historial';
+import Puntos from './pages/private/Puntos';
+// import ReporteUsuario from './pages/private/ReporteUsuario';
 
 function App() {
   return (
     <Routes>
-
       {/* Layout público */}
-      <Route path="/" element={<PublicLayout />}>
-        <Route index element={<Home />} />
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
       </Route>
 
-      <Route path="/registro" element={<Registro />} />
+      {/* Rutas públicas */}
       <Route path="/login" element={<Login />} />
+      <Route path="/registro" element={<Registro />} />
 
-      {/* Layout privado para usuarios */}
-      <Route path="/panel" element={<PrivadoLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="recolecciones" element={<Recolecciones />} />
-        <Route path="historial" element={<Historial />} />
-        <Route path="puntos" element={<Puntos />} />
-        <Route path="perfil" element={<Perfil />} />
+      {/* Layout privado */}
+      <Route element={<PrivateLayout />}>
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/recolecciones" element={<Recolecciones />} />
+        <Route path="/reporte" element={<Reporte />} />
+        <Route path="/historial" element={<Historial />} />
+        <Route path="/puntos" element={<Puntos />} />
+        {/* <Route path="/reporte" element={<ReporteUsuario />} /> */}
       </Route>
 
-      {/* Layout privado para admin */}
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="usuarios" element={<GestionUsuarios />} />
-        <Route path="recolectores" element={<EmpresasRecolectoras />} />
-        <Route path="solicitudes" element={<Solicitudes />} />
-        <Route path="reportes" element={<Reportes />} />
-        <Route path="configuraciones" element={<Configuraciones />} />
-      </Route>
-      
     </Routes>
   );
 }
