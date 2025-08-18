@@ -19,6 +19,8 @@ require('./configs/db');
 // * Importar rutas 
 // Rutas de autenticación y registro
 const authRoutes = require('./routes/authRoutes.js');
+// Rutas de recolecciones
+const collectionsRoutes = require('./routes/collectionsRoutes.js');
 
 
 // Inicializar la app
@@ -35,6 +37,9 @@ app.use(morgan('dev'));  // Logs de peticiones
 
 // Ruta de autenticación y registro
 app.use('/api/auth', authRoutes);
+
+// Rutas de recolecciones
+app.use('/api/collections', require('./routes/collectionsRoutes.js'));
 
 // Arrancar servidor
 const PORT = process.env.PORT || 4000;
