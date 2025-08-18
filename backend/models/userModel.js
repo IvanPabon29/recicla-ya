@@ -4,7 +4,7 @@ const pool = require('../configs/db.js');
 const UserModel  = {
   // Buscar usuario por correo
   findByCorreo: async (correo) => {
-    const [rows] = await pool.query('SELECT correo FROM usuarios WHERE correo = ?', [correo]);
+    const [rows] = await pool.query('SELECT correo, password FROM usuarios WHERE correo = ?', [correo]);
     return rows[0];
   },
 
