@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const collectionsController = require("../controllers/collectionsController");
+const authMiddleware = require("../middlewares/auth.js");
 
 // Rutas de recolecciones para usuario normal
 
@@ -10,13 +11,13 @@ const collectionsController = require("../controllers/collectionsController");
  * @desc    Programar una nueva recolección
  * @access  Público (pero normalmente se haría privado con auth)
  */
-router.post("/", collectionsController.createCollection);
+router.post("/", authMiddleware, collectionsController.createCollection);
 
 /**
  * @route   GET /api/collections/:correo
  * @desc    Obtener todas las recolecciones de un usuario por su correo
  * @access  Público (pero normalmente se haría privado con auth)
  */
-router.get("/:correo", collectionsController.getUserCollections);
+router.get("/", authMiddleware, collectionsController.getUserCollections);
 
 module.exports = router;
