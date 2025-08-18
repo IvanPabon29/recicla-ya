@@ -39,7 +39,7 @@ app.use(morgan('dev'));  // Logs de peticiones
 app.use('/api/auth', authRoutes);
 
 // Rutas de recolecciones
-app.use('/api/collections', require('./routes/collectionsRoutes.js'));
+app.use('/api/collections', collectionsRoutes); 
 
 // Arrancar servidor
 const PORT = process.env.PORT || 4000;
