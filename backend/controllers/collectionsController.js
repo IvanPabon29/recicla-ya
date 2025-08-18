@@ -1,53 +1,53 @@
-import pool from '../config/db.js';
+// controllers/collectionsController.js
+const Collection = require('../models/collectionModel.js');
 
-export async function createCollection(req, res) {
-  try {
-    const { scheduled_date, time_window, waste_type, quantity_kg, notes } = req.body;
+/**
+ * Controlador para las recolecciones de usuarios
+ */
+const collectionsController = {
+  /**
+   * Programar una nueva recolección
+   * POST /api/collections
+   */
+  createCollection: async (req, res) => {
+    try {
+      const { correo, fecha, hora, tipoResiduo, comentarios } = req.body;
 
-    const [result] = await pool.query(
-      `INSERT INTO collections (user_id, scheduled_date, time_window, waste_type, quantity_kg, notes)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [
-        req.user.id,
-        scheduled_date,
-        time_window,
-        waste_type,
-        quantity_kg ?? 0,
-        notes || null
-      ]
-    );
+      if (!correo || !fecha || !hora || !tipoResiduo) {
+        return res.status(400).json({ error: "Todos los campos obligatorios deben completarse." });
+      }
 
-    const [row] = await pool.query('SELECT * FROM collections WHERE id = ?', [result.insertId]);
-    res.status(201).json(row[0]);
-  } catch (err) {
-    console.error('createCollection error:', err);
-    res.status(500).json({ error: 'Error en el servidor' });
+      const insertId = await Collection.create({
+        correo,
+        fecha,
+        hora,
+        tipoResiduo,
+        comentarios
+      });
+
+      res.status(201).json({ message: "Recolección programada exitosamente.", id: insertId });
+    } catch (error) {
+      console.error("Error al programar recolección:", error);
+      res.status(500).json({ error: "Error en el servidor." });
+    }
+  },
+
+  /**
+   * Obtener todas las recolecciones de un usuario por correo
+   * GET /api/collections/:correo
+   */
+  getUserCollections: async (req, res) => {
+    try {
+      const { correo } = req.params;
+
+      const collections = await Collection.findByCorreo(correo);
+
+      res.json(collections);
+    } catch (error) {
+      console.error("Error al obtener recolecciones:", error);
+      res.status(500).json({ error: "Error en el servidor." });
+    }
   }
-}
+};
 
-export async function listMyCollections(req, res) {
-  try {
-    const { from, to, status, waste_type } = req.query;
-
-    const where = ['user_id = ?'];
-    const params = [req.user.id];
-
-    if (from) { where.push('scheduled_date >= ?'); params.push(from); }
-    if (to) { where.push('scheduled_date <= ?'); params.push(to); }
-    if (status) { where.push('status = ?'); params.push(status); }
-    if (waste_type) { where.push('waste_type = ?'); params.push(waste_type); }
-
-    const sql = `
-      SELECT id, scheduled_date, time_window, waste_type, quantity_kg, status, notes, created_at
-      FROM collections
-      WHERE ${where.join(' AND ')}
-      ORDER BY scheduled_date DESC, id DESC
-    `;
-
-    const [rows] = await pool.query(sql, params);
-    res.json(rows);
-  } catch (err) {
-    console.error('listMyCollections error:', err);
-    res.status(500).json({ error: 'Error en el servidor' });
-  }
-}
+module.exports = collectionsController;
