@@ -1,38 +1,22 @@
-import { Router } from 'express';
-import { body, query } from 'express-validator';
-import { authRequired } from '../middlewares/auth.js';
-import { createCollection, listMyCollections } from '../controllers/collections.controller.js';
-import { validate } from '../middlewares/validate.js';
+// routes/collectionsRoutes.js
+const express = require("express");
+const router = express.Router();
+const collectionsController = require("../controllers/collectionsController");
 
-const router = Router();
+// Rutas de recolecciones para usuario normal
 
-// Programar recolección
-router.post(
-  '/',
-  authRequired,
-  [
-    body('scheduled_date').isISO8601().withMessage('Fecha inválida (YYYY-MM-DD)'),
-    body('time_window').isIn(['Mañana', 'Tarde', 'Noche']),
-    body('waste_type').isIn(['reciclables', 'peligrosos', 'organicos', 'otros']),
-    body('quantity_kg').optional().isFloat({ min: 0 }),
-    body('notes').optional().isLength({ max: 255 })
-  ],
-  validate,
-  createCollection
-);
+/**
+ * @route   POST /api/collections
+ * @desc    Programar una nueva recolección
+ * @access  Público (pero normalmente se haría privado con auth)
+ */
+router.post("/", collectionsController.createCollection);
 
-// Listado (mis recolecciones) con filtros
-router.get(
-  '/',
-  authRequired,
-  [
-    query('from').optional().isISO8601(),
-    query('to').optional().isISO8601(),
-    query('status').optional().isIn(['programada','confirmada','en_ruta','completada','cancelada']),
-    query('waste_type').optional().isIn(['reciclables','peligrosos','organicos','otros'])
-  ],
-  validate,
-  listMyCollections
-);
+/**
+ * @route   GET /api/collections/:correo
+ * @desc    Obtener todas las recolecciones de un usuario por su correo
+ * @access  Público (pero normalmente se haría privado con auth)
+ */
+router.get("/:correo", collectionsController.getUserCollections);
 
-export default router;
+module.exports = router;
