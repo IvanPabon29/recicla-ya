@@ -11,9 +11,11 @@ const collectionsController = {
    */
   createCollection: async (req, res) => {
     try {
-      const { correo, fecha, hora, tipoResiduo, comentarios } = req.body;
+      const { fecha, hora, tipo, comentarios } = req.body;
+      const correo = req.user?.correo;  //  tomado del JWT
 
-      if (!correo || !fecha || !hora || !tipoResiduo) {
+
+      if (!fecha || !hora || !tipo) {
         return res.status(400).json({ error: "Todos los campos obligatorios deben completarse." });
       }
 
@@ -21,7 +23,7 @@ const collectionsController = {
         correo,
         fecha,
         hora,
-        tipoResiduo,
+        tipo,
         comentarios
       });
 
@@ -36,12 +38,15 @@ const collectionsController = {
    * Obtener todas las recolecciones de un usuario por correo
    * GET /api/collections/:correo
    */
+
   getUserCollections: async (req, res) => {
     try {
-      const { correo } = req.params;
+      const correo = req.user?.correo;  //  también tomado del token
+      if (!correo) {
+        return res.status(401).json({ error: "No autorizado, falta correo en token." });
+      }
 
       const collections = await Collection.findByCorreo(correo);
-
       res.json(collections);
     } catch (error) {
       console.error("Error al obtener recolecciones:", error);
