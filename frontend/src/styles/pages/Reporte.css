@@ -1,0 +1,124 @@
+@import '../variables.css';
+
+/* Reporte.css - Estilos para la página de reporte de recolecciones */
+.reporte-container {
+  padding: 2rem;
+  background-color: var(--gris-claro);
+  min-height: 100vh;
+}
+
+.reporte-title {
+  font-size: 2rem;
+  color: var(--verde-principal);
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.filtros-container input,
+.filtros-container select {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+.filtros-container input:focus,
+.filtros-container select:focus {
+  border-color: var(--verde-principal);
+  outline: none;
+}
+
+.btn-buscar {
+  background-color: var(--verde-principal);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-buscar:hover {
+  background-color: #218c74;
+}
+
+.btn-pdf {
+  background-color: #e63946; /* Rojo para PDF */
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-pdf:hover {
+  background-color: #c72c3c;
+}
+
+.reporte-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.reporte-table th,
+.reporte-table td {
+  padding: 0.9rem;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.reporte-table th {
+  background-color: var(--verde-principal);
+  color: #fff;
+  font-weight: bold;
+}
+
+.reporte-table tr:hover {
+  background-color: rgba(0, 128, 96, 0.05);
+}
+
+.no-data {
+  text-align: center;
+  color: #666;
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filtros-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-buscar,
+  .btn-pdf {
+    width: 100%;
+    text-align: center;
+  }
+
+  .reporte-table {
+    font-size: 0.85rem;
+  }
+
+  .reporte-table th,
+  .reporte-table td {
+    padding: 0.6rem;
+  }
+}
