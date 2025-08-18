@@ -17,11 +17,11 @@ const pool = require('../configs/db.js');
 const Collection = {
   // Crear una nueva recolección
   create: async (collectionData) => {
-    const { correo, fecha, hora, tipoResiduo, comentarios } = collectionData;
+    const { correo, fecha, hora, tipo, comentarios } = collectionData;
     const [result] = await pool.query(
-      `INSERT INTO recolecciones (correo, fecha, hora, tipo_residuo, comentarios, estado)
+      `INSERT INTO recolecciones (correo, fecha, hora, tipo, observaciones, estado)
        VALUES (?, ?, ?, ?, ?, 'pendiente')`,
-      [correo, fecha, hora, tipoResiduo, comentarios]
+      [correo, fecha, hora, tipo, comentarios]
     );
     return result.insertId;
   },
