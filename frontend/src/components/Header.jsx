@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Header.css';
+import '../styles/components/Header.css';
 
 /**
  * Header público del sistema. 

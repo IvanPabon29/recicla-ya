@@ -1,22 +1,30 @@
 // src/components/SidebarPrivado.jsx
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/sidebarPrivado.css';
+import '../styles/components/SidebarPrivado.css';
 
 /**
- * Sidebar de navegación para el layout privado del sistema ReciclaYa.
- * - En pantallas grandes se muestra como un sidebar lateral.
- * - En móviles se convierte en un menú hamburguesa que puede abrirse/cerrarse.
+ * Sidebar de navegación para layouts privados del sistema ReciclaYa.
+ * - Reutilizable para cualquier tipo de usuario (normal, admin, empresa).
+ * - Soporta menú hamburguesa y diseño responsive.
+ * 
+ * @param {boolean} abierto - Si el menú está visible (en móvil).
+ * @param {function} cerrar - Función para cerrar el menú.
+ * @param {Array} rutas - Rutas del menú (path, nombre, icono).
  */
-function SidebarPrivado({ abierto, cerrar }) {
+function SidebarPrivado({ abierto, cerrar, rutas }) {
   const location = useLocation();
 
-  const rutas = [
+  // Rutas por defecto (usuario normal)
+  const rutasPorDefecto = [
     { path: '/dashboard', nombre: 'Inicio', icono: 'bi bi-house-door-fill' },
     { path: '/recolecciones', nombre: 'Solicitar Recolección', icono: 'bi bi-truck' },
     { path: '/historial', nombre: 'Historial', icono: 'bi bi-clock-history' },
+    { path: '/reporte', nombre: 'Reportes', icono: 'bi bi-clipboard-data' },
     { path: '/puntos', nombre: 'Mis Puntos', icono: 'bi bi-coin' },
     { path: '/perfil', nombre: 'Perfil', icono: 'bi bi-person-circle' }
   ];
+
+  const links = rutas || rutasPorDefecto;
 
   return (
     <aside className={`sidebar-privado ${abierto ? 'activo' : ''}`}>
@@ -34,7 +42,7 @@ function SidebarPrivado({ abierto, cerrar }) {
       {/* Navegación */}
       <nav className="sidebar-nav">
         <ul>
-          {rutas.map(({ path, nombre, icono }) => (
+          {links.map(({ path, nombre, icono }) => (
             <li key={path} className={location.pathname === path ? 'activo' : ''}>
               <Link to={path} onClick={cerrar}>
                 <i className={icono}></i>
