@@ -5,7 +5,7 @@ const pool = require("../configs/db.js");
  */
 const Report = {
   findFiltered: async (filtros) => {
-    let query = "SELECT * FROM recolecciones WHERE correo = ?";
+    let query = "SELECT fecha, hora, tipo, estado, observaciones FROM recolecciones WHERE correo = ?";
     const params = [filtros.correo];
 
     if (filtros.fechaInicio) {
