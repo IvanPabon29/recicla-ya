@@ -104,11 +104,11 @@ const Reporte = () => {
           {recolecciones.length > 0 ? (
             recolecciones.map((r, i) => (
               <tr key={i}>
-                <td>{r.fecha}</td>
+                <td>{r.fecha.slice(0, 10)}</td>
                 <td>{r.hora}</td>
                 <td>{r.tipo}</td>
                 <td>{r.estado}</td>
-                <td>{r.comentarios || "—"}</td>
+                <td>{r.observaciones || "—"}</td>
               </tr>
             ))
           ) : (
