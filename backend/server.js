@@ -21,7 +21,8 @@ require('./configs/db');
 const authRoutes = require('./routes/authRoutes.js');
 // Rutas de recolecciones
 const collectionsRoutes = require('./routes/collectionsRoutes.js');
-
+// Rutas de reportes
+const reportRoutes = require('./routes/reportRoutes.js');
 
 // Inicializar la app
 const app = express();
@@ -40,6 +41,10 @@ app.use('/api/auth', authRoutes);
 
 // Rutas de recolecciones
 app.use('/api/collections', collectionsRoutes); 
+
+// Rutas de reportes
+app.use('/api/reports', reportRoutes);
+
 
 // Arrancar servidor
 const PORT = process.env.PORT || 4000;
