@@ -1,7 +1,7 @@
 import '../../styles/pages/registro.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import api from '../../services/authService'; // Aquí centralizamos las peticiones HTTP
+import authService from '../../services/authService'; // Aquí centralizamos las peticiones HTTP
 
 /**
  * Página de registro para nuevos usuarios del sistema ReciclaYa.
@@ -46,8 +46,8 @@ function Registro() {
     try {
       setLoading(true);
 
-      // Llamada al backend (cuando esté listo)
-      await api.post('/auth/register', {
+      // Llamada al backend 
+      await authService.register({
         nombre: formData.nombre,
         apellido: formData.apellido,
         correo: formData.correo,
@@ -77,37 +77,37 @@ function Registro() {
           <form className="registro-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="nombre">Nombre</label>
-              <input type="text" id="nombre" value={formData.nombre} onChange={handleChange} required />
+              <input type="text" id="nombre" placeholder='Nombre' value={formData.nombre} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="apellido">Apellido</label>
-              <input type="text" id="apellido" value={formData.apellido} onChange={handleChange} required />
+              <input type="text" id="apellido" placeholder='Apellido' value={formData.apellido} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="correo">Correo electrónico</label>
-              <input type="email" id="correo" value={formData.correo} onChange={handleChange} required />
+              <input type="email" id="correo" placeholder='ejemplo@correo.com' value={formData.correo} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="telefono">Teléfono</label>
-              <input type="tel" id="telefono" value={formData.telefono} onChange={handleChange} required />
+              <input type="tel" id="telefono" placeholder='Telefono' value={formData.telefono} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="direccion">Dirección</label>
-              <input type="text" id="direccion" value={formData.direccion} onChange={handleChange} required />
+              <input type="text" id="direccion" placeholder='Calle Falsa 123' value={formData.direccion} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
-              <input type="password" id="password" value={formData.password} onChange={handleChange} required />
+              <input type="password" id="password" placeholder='Contraseña' value={formData.password} onChange={handleChange} required />
             </div>
             
             <div className="form-group">
               <label htmlFor="confirmar">Confirmar Contraseña</label>
-              <input type="password" id="confirmar" value={formData.confirmar} onChange={handleChange} required />
+              <input type="password" id="confirmar" placeholder='Confirmar Contraseña' value={formData.confirmar} onChange={handleChange} required />
             </div>
 
             <button type="submit" className="btn-primary-registro" disabled={loading}>
