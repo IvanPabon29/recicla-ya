@@ -4,12 +4,12 @@ USE reciclaYaDB;
 
 -- Tabla usuarios
 CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL UNIQUE,
+    correo VARCHAR(100) NOT NULL UNIQUE PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    telefono VARCHAR(20),
-    direccion VARCHAR(255),
+    telefono VARCHAR(20) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
     rol ENUM('usuario', 'empresa', 'admin') DEFAULT 'usuario',
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -17,15 +17,12 @@ CREATE TABLE usuarios (
 -- Tabla recolecciones
 CREATE TABLE recolecciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
-    tipo_residuo ENUM('plástico', 'papel', 'vidrio', 'orgánico', 'electrónicos') NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    fecha DATETIME NOT NULL,
+    hora VARCHAR(100) NOT NULL,
+    tipo ENUM('plastico', 'papel', 'vidrio', 'organico', 'peligroso') NOT NULL,
     estado ENUM('pendiente', 'en_proceso', 'completada', 'cancelada') DEFAULT 'pendiente',
     observaciones TEXT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    FOREIGN KEY (correo) REFERENCES usuarios(correo) ON DELETE CASCADE
 );
-
--- Índices para mejorar búsquedas
-CREATE INDEX idx_usuario_fecha ON recolecciones (usuario_id, fecha);
